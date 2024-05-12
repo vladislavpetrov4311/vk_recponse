@@ -39,7 +39,7 @@ class cart
     
     //метод для обновление столбца count в таблице Product
     //(когда мы сменили в корзине статус на "заказан", количество товара в таблице Product должно уменьшиться на то количество, которое заказал пользователь)
-    public function updata_product($data): void
+    public function updata_product($data): bool
     {
         $id_product = $this->get_id_product($data);
 
@@ -51,10 +51,17 @@ class cart
         $res = $temp->fetch(PDO::FETCH_ASSOC);
 
         $sql = $this->obj->prepare("UPDATE `Product` SET `count` = :kolvo WHERE `id` = :id;");
-        $sql->execute([
-            ':id' => $id_product['id_product'],
-            ':kolvo' => $res['count'] - ($id_product['summ_itog']/$res['price'])
-        ]);
+
+        if($res['count'] >= ($id_product['summ_itog']/$res['price']))
+        {
+            $sql->execute([
+                ':id' => $id_product['id_product'],
+                ':kolvo' => $res['count'] - ($id_product['summ_itog']/$res['price'])
+            ]);
+            return true;
+        }
+        else
+            return false;
     }
 
 
