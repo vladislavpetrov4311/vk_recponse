@@ -14,7 +14,7 @@ if($method === "POST")
     //проверяем status, если "не заказан" и такой заказ в корзине существует, то можем оформлять его 
     if($status != false && $status['status'] == "не заказан")
     {
-        if($main->updata_product($_POST))
+        if($main->updata_product($_POST)) //если списание товара успешно
         {
             $main->modify_status_in_cart($_POST); //меняю статус на "заказан"
             http_response_code(200);
