@@ -1,0 +1,29 @@
+name: myapp_data
+version: '3'
+
+services:
+  myapp:
+    image: petrovvd/vk-test
+    volumes: 
+      - ./:/var/www/html
+    ports:
+      - 9000:80
+      
+  my_bd:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testDB
+    volumes:
+      - ./testDB.sql:/docker-entrypoint-initdb.d/testDB.sql
+  
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 3000:80
+    environment:
+      - PMA_ARBITRARY=1
+      - UPLOAD_LIMIT=102400K
