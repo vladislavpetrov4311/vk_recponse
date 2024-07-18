@@ -1,0 +1,33 @@
+<html>
+<meta charset="UTF-8">
+<body>
+
+  <button type="button" onclick="showForm('ru')">Русский</button>
+  <button type="button" onclick="showForm('en')">English</button>
+
+    <div id="post-list">
+
+    </div>
+
+
+    <form id="form-ru" style="display: none;">    
+  <p>Введите кличку животного</p>
+  <input type="text" id="name_ru">
+  <p>Введите породу животного</p>
+  <input type="text" id="breed_ru">
+  <br>
+  <button type="button" onclick="addpost('ru')">Отправить</button>
+    </form>
+
+    <form id="form-en" style="display: none;">
+      <p>Input name animal</p>
+      <input type="text" id="name_en">
+      <p>Input bredd animal</p>
+      <input type="text" id="breed_en">
+      <br>
+      <button type="button" onclick="addpost('en')">Submit</button>
+  </form>
+
+<script src = "1.js"></script>
+</body>
+</html>
